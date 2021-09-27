@@ -114,7 +114,7 @@ parser1 = ParserYoutube("https://www.youtube.com/watch?v=6JhVo2zS8hU", full_path
 
 parser1.load_all_comments()
 comments_all = parser1.get_comments() 
-users_all = parser1.get_user 
+users_all = parser1.get_user()
 print(comments_all)
 
 
