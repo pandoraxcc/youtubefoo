@@ -51,3 +51,23 @@ class ParserYoutube:
         except NoSuchElementException:
             pass
         
+def scroll_down(self):
+        # Get scroll height.
+        max_height = self.browser.execute_script("return document.body.scrollHeight")
+
+        while True:
+
+            # Scroll down to the bottom.
+            self.browser.execute_script("window.scrollTo(0, document.documentElement.scrollHeight);")
+            max_height = self.browser.execute_script("return document.documentElement.scrollHeight")
+            # Wait to load the page.
+            time.sleep(2)
+
+            # Calculate new scroll height and compare with last scroll height.
+            new_height = self.browser.execute_script("return document.documentElement.scrollHeight")
+
+            if new_height == max_height:
+                break
+
+            max_height = new_height
+
