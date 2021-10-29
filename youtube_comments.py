@@ -83,3 +83,29 @@ class ParserYoutube:
         #print(len(comments))
         
         return comments_lst
+
+   def get_user_ids(self):
+
+        user_prof = []
+        user_chn = []
+        users = self.browser.find_elements_by_css_selector('#author-text > span')
+        for user in users:
+            user_prof.append(user.text)
+            #print(user.text)
+
+        users_channel = self.browser.find_elements_by_css_selector('#author-text')
+        for channel in users_channel:
+            user_chn.append(channel.get_attribute('href'))
+            print(channel.get_attribute('href'))
+
+        
+        return user_prof, user_chn
+
+
+    def save_data(self):
+
+        profile_names, urls_final = self.get_user_ids()
+        comments_final = self.get_all_comments()
+        rows_final = zip(profile_names, urls_final, comments_final)
+
+        return rows_final
