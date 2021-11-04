@@ -109,3 +109,27 @@ class ParserYoutube:
         rows_final = zip(profile_names, urls_final, comments_final)
 
         return rows_final
+      
+      
+      
+    def write_csv_report(self):
+
+        header_row = ['profile_names', 'profile_url', 'comments']
+        rows_final = self.save_data()
+        
+
+        with open('results_youtube.csv', 'w', encoding = 'utf-8', newline='') as f:
+            writer = csv.writer(f)
+            # write the header
+            writer.writerow(header_row)
+            # write multiple rows
+            writer.writerows(rows_final)
+
+            
+parser1 = ParserYoutube("https://www.youtube.com/watch?v=eK0pO79YkvY", full_path)
+parser1.load_all_comments()
+parser1.scroll_down()
+parser1.save_data()
+parser1.write_csv_report()
+            
+            
